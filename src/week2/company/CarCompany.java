@@ -34,7 +34,7 @@ public class CarCompany {
 	
 	public void addCarProduction(String carName){
 		try {
-			Class carClass = Class.forName(carName);
+			Class<?> carClass = Class.forName(carName);
 			Car car = (Car) carClass.newInstance();
 			
 			CarInformation carInformation = carInformationList.get(carName);
