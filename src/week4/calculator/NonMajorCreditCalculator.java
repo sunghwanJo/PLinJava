@@ -1,4 +1,4 @@
-package week4;
+package week4.calculator;
 
 public class NonMajorCreditCalculator implements ICreditCalculator {
 

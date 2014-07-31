@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import week4.dummy.DummyContent;
 import week4.dummy.DummyContent.DummyItem;
+import week4.maker.CreditReportMaker;
+import week4.model.Student;
 
 public class School {
 

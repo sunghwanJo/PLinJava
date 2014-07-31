@@ -1,4 +1,4 @@
-package week4;
+package week4.model;
 
 import java.util.HashMap;
 

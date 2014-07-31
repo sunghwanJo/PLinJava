@@ -1,8 +1,13 @@
-package week4;
+package week4.maker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import week4.calculator.ICreditCalculator;
+import week4.calculator.MajorCreditCalculator;
+import week4.calculator.NonMajorCreditCalculator;
+import week4.model.Student;
 
 public class CreditReportMaker implements ICreditReportMaker {
 	private static final int MAJOR_SUBJECT = 1;
