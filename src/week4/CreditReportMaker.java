@@ -4,53 +4,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class CreditCalculator implements ICreditCalculator {
+public class CreditReportMaker implements ICreditReportMaker {
 	private static final int MAJOR_SUBJECT = 1;
 	private static final int NON_MAJOR_SUBJECT = 2;
 
 	public HashMap<Student, HashMap<String, String>> creditReport = new HashMap<Student, HashMap<String, String>>();
+	private ICreditCalculator creditCalculator;
 
-	public String calculateCreditMajorSubject(Integer point) {
-		if (95 <= point && point <= 100)
-			return "S";
-		else if (90 <= point)
-			return "A";
-		else if (80 <= point)
-			return "B";
-		else if (70 <= point)
-			return "C";
-		else if (60 <= point)
-			return "D";
-		else if (0 <= point)
-			return "F";
-		else
-			return "X";
-	}
-
-	public String calculateCreditNonMajorSubject(Integer point) {
-		if (90 <= point && point <= 100)
-			return "A";
-		else if (80 <= point)
-			return "B";
-		else if (70 <= point)
-			return "C";
-		else if (55 <= point)
-			return "D";
-		else if (0 <= point)
-			return "F";
-		else
-			return "X";
-	}
-
-	@Override
-	public String calculateCredit(String subject, Integer point, int option) {
+	public String calculateCredit(Integer point, int option) {
 		String credit;
 		switch (option) {
 		case MAJOR_SUBJECT:
-			credit = calculateCreditMajorSubject(point);
+			creditCalculator = new MajorCreditCalculator();
+			credit = creditCalculator.calculate(point);
 			break;
 		case NON_MAJOR_SUBJECT:
-			credit = calculateCreditNonMajorSubject(point);
+			creditCalculator = new NonMajorCreditCalculator();
+			credit = creditCalculator.calculate(point);
 			break;
 		default:
 			credit = "X";
@@ -74,10 +44,9 @@ public class CreditCalculator implements ICreditCalculator {
 
 				point = student.getReport().get(subjectName);
 				if (student.getMajorSubject().equals(subjectName))
-					credit = calculateCredit(subjectName, point, MAJOR_SUBJECT);
+					credit = calculateCredit(point, MAJOR_SUBJECT);
 				else
-					credit = calculateCredit(subjectName, point,
-							NON_MAJOR_SUBJECT);
+					credit = calculateCredit(point, NON_MAJOR_SUBJECT);
 
 				creditResult.put(subjectName, credit);
 			}
@@ -88,7 +57,8 @@ public class CreditCalculator implements ICreditCalculator {
 	public void printStudentReport(Student student,
 			HashMap<String, String> studentReport) {
 		System.out.println("\tName : " + student.getName() + " | Serail : "
-				+ student.getStudentSerialNumber() + "  | Major Subject :" + student.getMajorSubject());
+				+ student.getStudentSerialNumber() + "  | Major Subject :"
+				+ student.getMajorSubject());
 
 		Iterator<String> iterator;
 		iterator = studentReport.keySet().iterator();

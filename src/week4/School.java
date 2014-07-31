@@ -9,7 +9,7 @@ public class School {
 
 	public static void main(String[] args) {
 		ArrayList<Student> studentList = new ArrayList<Student>();
-		CreditCalculator creditCalculator = new CreditCalculator();
+		CreditReportMaker creditCalculator = new CreditReportMaker();
 		
 		for(DummyItem item : DummyContent.ITEMS){
 			studentList.add(new Student(item.name, item.studentSerialNumber, item.majorSubject, item.mathPoint, item.englishPoint));
