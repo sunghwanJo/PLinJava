@@ -1,11 +1,15 @@
 package mid.stack;
 
-import mid.Element;
+import mid.maze.Element;
 
 public class ElementStack implements IStack {
 	int top;
 	Element[] stack;
 	
+	public Element[] getStack() {
+		return stack;
+	}
+
 	public ElementStack(){
 		this(10);
 	}
@@ -47,5 +51,14 @@ public class ElementStack implements IStack {
 		}
 		
 		stack = newStack;
+	}
+
+	@Override
+	public Object peek() {
+		if(isEmpty()){
+			return (Element)null;
+		}
+		
+		return (Element)stack[top];
 	}
 }
