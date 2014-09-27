@@ -41,6 +41,25 @@ public class Customer {
 		return customer;
 	}
 
+	
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(id+":"+
+		name+":"+
+		arrivedTime+":"+
+		ticketingTime+":"+
+		//startStation;
+		//arrivalStation;
+		
+		//이하 출력정보
+		waitTimeForTicketing+":"+
+		timeForTicketing+":"+
+		waitTimeForTrain);
+		return sb.toString();
+	}
+
 	public int getId() {
 		return id;
 	}

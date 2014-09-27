@@ -24,7 +24,7 @@ public class Main {
 		System.out.println("Success to make Customer List ["+customerList.size()+"]");
 		
 		// 고객 도착 반복문.
-		while(!customerList.isEmpty() && ticketBooth.isOpen()){
+		while(!customerList.isEmpty() && ticketBooth.isOpen() ){
 			System.out.println("TIME :" + time);
 			Iterator<Customer> iter = customerList.iterator();
 			
