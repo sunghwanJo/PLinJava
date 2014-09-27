@@ -8,6 +8,13 @@ public class Customer {
 	private int startStation;
 	private int arrivalStation;
 	
+	//이하 출력정보
+	private int waitTimeForTicketing;
+	private int timeForTicketing;
+	private int waitTimeForTrain;
+
+	// 열차가 출발한 시간 + 알고리즘으로 구한 시간
+	private int arrivedTimeToTrain;
 	
 	private Customer(int id, String name, int arrivedTime, int ticketingTime,
 			int startStation, int arrivalStation) {
@@ -25,7 +32,7 @@ public class Customer {
 		if( id == null || name == null || arrivedTime == null || ticketingTime == null || startStationName==null || arrivalStationName == null)
 			throw new MakeCustomerFailException("고객 정보가 부족합니다.");
 		
-		Station stationMap = Station.getMap();
+		StationContract stationMap = StationContract.getMap();
 		int startStation = stationMap.get(startStationName);
 		int arrivalStation = stationMap.get(arrivalStationName);
 		
@@ -80,6 +87,38 @@ public class Customer {
 
 	public void setArrivalStation(int arrivalStation) {
 		this.arrivalStation = arrivalStation;
+	}
+
+	public int getWaitTimeForTicketing() {
+		return waitTimeForTicketing;
+	}
+
+	public void setWaitTimeForTicketing(int waitTimeForTicketing) {
+		this.waitTimeForTicketing = waitTimeForTicketing;
+	}
+
+	public int getTimeForTicketing() {
+		return timeForTicketing;
+	}
+
+	public void setTimeForTicketing(int timeForTicketing) {
+		this.timeForTicketing = timeForTicketing;
+	}
+
+	public int getWaitTimeForTrain() {
+		return waitTimeForTrain;
+	}
+
+	public void setWaitTimeForTrain(int waitTimeForTrain) {
+		this.waitTimeForTrain = waitTimeForTrain;
+	}
+
+	public int getArrivedTimeToTrain() {
+		return arrivedTimeToTrain;
+	}
+
+	public void setArrivedTimeToTrain(int arrivedTimeToTrain) {
+		this.arrivedTimeToTrain = arrivedTimeToTrain;
 	}
 
 	

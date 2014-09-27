@@ -7,38 +7,42 @@ import java.util.PriorityQueue;
 import last.customer.Customer;
 import last.customer.CustomerMaker;
 import last.station.DefaultPolicy;
+import last.station.TicketBooth;
 
 
 public class Main {
-	
+	public static int time=0;
 	public static void main(String[] args) {
 		ArrayList<Customer> customerList;
-		PriorityQueue<Customer> queue;
-		
+		TicketBooth ticketBooth;
 		// Set up Customer Information
 		customerList = CustomerMaker.make();
 		
 		// Set up Ticketing Booth
-		queue = new PriorityQueue<Customer>(customerList.size(), new DefaultPolicy());
+		ticketBooth = new TicketBooth();
 		
 		System.out.println("Success to make Customer List ["+customerList.size()+"]");
 		
-		int timer = 0;
-		while(!customerList.isEmpty()){
-			System.out.println("TIME :" + timer);
+		// 고객 도착 반복문.
+		while(!customerList.isEmpty() && ticketBooth.isOpen()){
+			System.out.println("TIME :" + time);
 			Iterator<Customer> iter = customerList.iterator();
 			
 			while(iter.hasNext()){
 				Customer customer = iter.next();
-				if(customer.getArrivedTime() == timer){
-					queue.add(customer);
+				if(customer.getArrivedTime() == time){
+					ticketBooth.addCustomer(customer);
 					iter.remove();
 				}
 			}
-			timer++;
-		}
+			ticketBooth.ticketing();
 		
+			time++;
+		}
 		System.out.println("END SYSTEM");
+		//고객 처리 반복 쓰레드가 종료되면 끝
+		
+		
 	}
 
 }

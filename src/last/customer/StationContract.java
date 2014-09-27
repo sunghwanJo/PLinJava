@@ -2,10 +2,10 @@ package last.customer;
 
 import java.util.HashMap;
 
-public class Station extends HashMap<String, Integer>{
+public class StationContract extends HashMap<String, Integer>{
 	private static final long serialVersionUID = 1L;
 	
-	public static Station mInstance;
+	public static StationContract mInstance;
 	
 	{
 		this.put("Seoul", 0);
@@ -17,9 +17,9 @@ public class Station extends HashMap<String, Integer>{
 		this.put("Gwangju", 1);
 	}
 	
-	public static Station getMap(){
+	public static StationContract getMap(){
 		if(mInstance == null)
-			mInstance = new Station();
+			mInstance = new StationContract();
 		return mInstance;
 	}
 	

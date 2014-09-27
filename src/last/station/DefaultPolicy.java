@@ -2,7 +2,7 @@ package last.station;
 
 import last.customer.Customer;
 
-public class DefaultPolicy extends TicketPolicy{
+public class DefaultPolicy extends Policy{
 
 	@Override
 	public int compare(Customer o1, Customer o2) {
