@@ -1,4 +1,4 @@
-package last.station;
+package last.station.policy;
 
 import last.customer.Customer;
 

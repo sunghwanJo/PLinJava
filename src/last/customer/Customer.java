@@ -1,5 +1,7 @@
 package last.customer;
 
+import last.station.StationContract;
+
 public class Customer {
 	private int id;
 	private String name;
@@ -9,10 +11,12 @@ public class Customer {
 	private int arrivalStation;
 	
 	//이하 출력정보
+	//티켓팅하는데 걸리는 시간 대기시간.  == 받은시간 - 도착시간
 	private int waitTimeForTicketing;
+	//티켓을 받은시간
 	private int timeForTicketing;
+	// 기차를 기다린 시간
 	private int waitTimeForTrain;
-
 	// 열차가 출발한 시간 + 알고리즘으로 구한 시간
 	private int arrivedTimeToTrain;
 	
@@ -36,7 +40,7 @@ public class Customer {
 		int startStation = stationMap.get(startStationName);
 		int arrivalStation = stationMap.get(arrivalStationName);
 		
-		Customer customer = new Customer(id, arrivalStationName, arrivedTime, ticketingTime, startStation, arrivalStation);
+		Customer customer = new Customer(id, name, arrivedTime, ticketingTime, startStation, arrivalStation);
 		
 		return customer;
 	}
@@ -46,7 +50,8 @@ public class Customer {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(id+":"+
+		sb.append(
+		id+":"+
 		name+":"+
 		arrivedTime+":"+
 		ticketingTime+":"+
@@ -54,12 +59,48 @@ public class Customer {
 		//arrivalStation;
 		
 		//이하 출력정보
-		waitTimeForTicketing+":"+
-		timeForTicketing+":"+
-		waitTimeForTrain);
+		waitTimeForTicketing+"-"+
+		timeForTicketing+"-"+
+		waitTimeForTrain+"-"+
+		arrivedTimeToTrain);
 		return sb.toString();
 	}
-
+	public static String toCsvTitleString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append(
+		"아이디"+","+
+		"이름"+","+
+		"도착시간"+","+
+		"티켓팅소요시간"+","+
+		"출발역"+","+
+		"도착역"+","+
+		//이하 출력정보
+		"티켓대기시간"+","+
+		"티켓팅한시간"+","+
+		"열차기다린시간"+","+
+		"목적지도착시간"+"\n");
+		return sb.toString();
+	}
+	public String toCsvString(){
+		StringBuilder sb = new StringBuilder();
+		String startStationName = StationContract.getStationName(startStation);
+		String arrivalStationName = StationContract.getStationName(arrivalStation);
+		
+		sb.append(
+		id+","+
+		name+","+
+		arrivedTime+","+
+		ticketingTime+","+
+		startStationName+","+
+		arrivalStationName+","+
+		//이하 출력정보
+		waitTimeForTicketing+","+
+		timeForTicketing+","+
+		waitTimeForTrain+","+
+		arrivedTimeToTrain+"\n");
+		return sb.toString();
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -121,6 +162,7 @@ public class Customer {
 	}
 
 	public void setTimeForTicketing(int timeForTicketing) {
+		setWaitTimeForTicketing((timeForTicketing-ticketingTime) - arrivedTime);
 		this.timeForTicketing = timeForTicketing;
 	}
 

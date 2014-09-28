@@ -1,8 +1,11 @@
-package last.station;
+package last.station.ticket;
 
 import java.util.PriorityQueue;
 
 import last.customer.Customer;
+import last.station.platform.Platform;
+import last.station.policy.DefaultPolicy;
+import last.station.policy.TicketingTimePolicy;
 
 public class TicketBooth {
 	private static final int AGENT_NUM=3;
@@ -12,9 +15,9 @@ public class TicketBooth {
 	private Platform platform;
 	
 	public TicketBooth() {
-		customerWatingQueue = new PriorityQueue<Customer>(100, new DefaultPolicy());
+		customerWatingQueue = new PriorityQueue<Customer>(100, new TicketingTimePolicy());
 		isOpen = true;
-		platform = new Platform();
+		platform = Platform.getInstance();
 		agents = new Agent[3];
 		agents[0] = new Agent(this, platform);
 		agents[1] = new Agent(this, platform);
